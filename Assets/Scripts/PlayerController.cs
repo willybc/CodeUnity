@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(PlayerMotor))]
+[RequireComponent(typeof(RollBall))]
+
 
 public class PlayerController : MonoBehaviour {
 
+    public GameObject Body;
+    public GameObject Head;
 
     [SerializeField]
     private float speed = 5f;
@@ -24,9 +28,20 @@ public class PlayerController : MonoBehaviour {
         float _zMov = Input.GetAxisRaw("Vertical");
 
         Vector3 _movHorizontal = transform.right * _xMov;
-        Vector3 _movVertical = transform.forward * _zMov;
+
+        Vector3 _movVertical = transform.forward * _zMov ;
 
         Vector3 movement = new Vector3(_xMov, 0.0f, _zMov);
+        //Condicion movimiento rotacion
+        if (_movVertical != Vector3.zero)
+        {
+            Body.transform.Rotate(new Vector3(0, 270, 0) * Time.deltaTime);
+        }
+
+        if(_movHorizontal != Vector3.zero)
+        {
+            Body.transform.Rotate(new Vector3(0, 0, 180) * Time.deltaTime);
+        }
         
 
         // Final movement vector
