@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 _movVertical = transform.forward * _zMov ;
 
         Vector3 movement = new Vector3(_xMov, 0.0f, _zMov);
-        //Condicion movimiento rotacion
+        //Condicion movimiento rotacion BODY
         if (_movVertical != Vector3.zero)
         {
             Body.transform.Rotate(new Vector3(0, 270, 0) * Time.deltaTime);
@@ -54,6 +54,12 @@ public class PlayerController : MonoBehaviour {
         float _yRot = Input.GetAxisRaw("Mouse X");
 
         Vector3 _rotation = new Vector3(0f, _yRot, 0f) * lookSensitivity;
+        //Condicion movimiento rotacion HEAD
+        if (_rotation != Vector3.zero)
+        {
+            Head.transform.Rotate(new Vector3(0, 0, 90) * Time.deltaTime);
+        }
+
 
         //Apply rotation
         motor.Rotate(_rotation);
